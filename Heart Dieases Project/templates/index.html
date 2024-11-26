@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+        }
+        input[type="text"], select {
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Heart Disease Prediction</h1>
+    <form action="/predict" method="POST">
+        <label>Age:</label>
+        <input type="text" name="age" required>
+
+        <label>Sex:</label>
+        <select name="sex" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+
+        <label>Chest Pain Type (CP):</label>
+        <select name="cp" required>
+            <option value="typical angina">Typical Angina</option>
+            <option value="atypical angina">Atypical Angina</option>
+            <option value="non-anginal pain">Non-Anginal Pain</option>
+            <option value="asymptomatic">Asymptomatic</option>
+        </select>
+
+        <label>Trestbps (Resting Blood Pressure):</label>
+        <input type="text" name="trestbps" required>
+
+        <label>Chol (Serum Cholestoral in mg/dl):</label>
+        <input type="text" name="chol" required>
+
+        <label>Fbs (Fasting Blood Sugar > 120 mg/dl):</label>
+        <input type="text" name="fbs" required>
+
+        <label>Restecg (Resting Electrocardiographic Results):</label>
+        <input type="text" name="restecg" required>
+
+        <label>Thalach (Maximum Heart Rate Achieved):</label>
+        <input type="text" name="thalach" required>
+
+        <label>Exang (Exercise Induced Angina):</label>
+        <input type="text" name="exang" required>
+
+        <label>Oldpeak (ST Depression Induced by Exercise):</label>
+        <input type="text" name="oldpeak" required>
+
+        <label>Slope (Slope of the Peak Exercise ST Segment):</label>
+        <input type="text" name="slope" required>
+
+        <label>Ca (Number of Major Vessels Colored by Flourosopy):</label>
+        <input type="text" name="ca" required>
+
+        <label>Thal (Thalassemia):</label>
+        <input type="text" name="thal" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+    <div class="result">
+        <h2>{{ prediction_text }}</h2>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
