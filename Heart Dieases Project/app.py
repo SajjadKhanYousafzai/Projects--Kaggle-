@@ -4,7 +4,7 @@ import numpy as np
 import os
 
 # Load the model
-model_path = "D:/My Projects/Projects/Heart Dieases Project/heart_disease_model.pkl"
+model_path = "D:/Projects (Kaggle)/Heart Dieases Project/heart_disease_model.pkl"
 
 # Initialize model variable
 model = None
