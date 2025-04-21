@@ -1,43 +1,67 @@
 from flask import Flask, render_template, request
-import pickle
+import pandas as pd
 import numpy as np
+import pickle
+from sklearn.preprocessing import StandardScaler
 
-# Initialize Flask app
 app = Flask(__name__)
 
-# Load the trained model
-with open("./rainfall_prediction_model.pkl", "rb") as f:
+# Load the model and scaler
+with open('best_model.pkl', 'rb') as f:
     model = pickle.load(f)
+with open('scaler.pkl', 'rb') as f:
+    scaler = pickle.load(f)
 
-# Define the home route
-@app.route("/", methods=["GET", "POST"])
+# Define feature names (same as training)
+feature_names = ['day', 'pressure', 'maxtemp', 'temparature', 'mintemp', 'dewpoint', 
+                 'humidity', 'cloud', 'sunshine', 'winddirection', 'windspeed', 
+                 'temp_diff', 'humidity_cloud', 'day_sin', 'day_cos']
+
+@app.route('/')
 def home():
-    prediction = None
+    return render_template('index.html')
 
-    if request.method == "POST":
-        # Get form inputs
-        features = [
-            float(request.form["pressure"]),
-            float(request.form["maxtemp"]),
-            float(request.form["temparature"]),
-            float(request.form["mintemp"]),
-            float(request.form["dewpoint"]),
-            float(request.form["humidity"]),
-            float(request.form["cloud"]),
-            float(request.form["sunshine"]),
-            float(request.form["winddirection"]),
-            float(request.form["windspeed"])
-        ]
+@app.route('/predict', methods=['POST'])
+def predict():
+    try:
+        # Get form data
+        data = {
+            'day': float(request.form['day']),
+            'pressure': float(request.form['pressure']),
+            'maxtemp': float(request.form['maxtemp']),
+            'temparature': float(request.form['temparature']),
+            'mintemp': float(request.form['mintemp']),
+            'dewpoint': float(request.form['dewpoint']),
+            'humidity': float(request.form['humidity']),
+            'cloud': float(request.form['cloud']),
+            'sunshine': float(request.form['sunshine']),
+            'winddirection': float(request.form['winddirection']),
+            'windspeed': float(request.form['windspeed'])
+        }
 
-        # Convert to NumPy array and reshape for model input
-        features_array = np.array(features).reshape(1, -1)
+        # Create DataFrame
+        df = pd.DataFrame([data])
 
-        # Make prediction
-        prediction = model.predict(features_array)[0]
-        prediction = "Yes, it will rain! ☔" if prediction == 1 else "No, it won't rain. ☀️"
+        # Feature engineering
+        df['temp_diff'] = df['maxtemp'] - df['mintemp']
+        df['humidity_cloud'] = df['humidity'] * df['cloud']
+        df['day_sin'] = np.sin(2 * np.pi * df['day'] / 365)
+        df['day_cos'] = np.cos(2 * np.pi * df['day'] / 365)
 
-    return render_template("index.html", prediction=prediction)
+        # Ensure correct feature order
+        X = df[feature_names]
 
-# Run Flask app
-if __name__ == "__main__":
+        # Scale features
+        X_scaled = scaler.transform(X)
+
+        # Predict probability
+        prob = model.predict_proba(X_scaled)[0, 1]
+        result = f"Probability of Rainfall: {prob:.2%}"
+
+        return render_template('index.html', prediction=result)
+    except Exception as e:
+        error = f"Error: {str(e)}"
+        return render_template('index.html', prediction=error)
+
+if __name__ == '__main__':
     app.run(debug=True)
