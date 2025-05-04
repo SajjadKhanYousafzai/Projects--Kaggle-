@@ -33,9 +33,32 @@ To run these projects locally (e.g., Jupyter notebooks or the Flask app for "Bin
 git clone https://github.com/SajjadKhanYousafzai/Projects--Kaggle-.git
 cd Projects--Kaggle-
 ```
-2. Set Up the Environment:
+### 2. Set Up the Environment:
 Ensure Python 3.8+ is installed.
 
 Create and activate a virtual environment:
+```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+### 3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+Note: Create a requirements.txt with:
+```txt
+pandas
+numpy
+scikit-learn
+catboost
+xgboost
+lightgbm
+flask
+seaborn
+matplotlib
+nltk
+spacy
+prophet
+rdkit
+```
+
