@@ -32,6 +32,7 @@ To run these projects locally (e.g., Jupyter notebooks or the Flask app for "Bin
 ```bash
 git clone https://github.com/SajjadKhanYousafzai/Projects--Kaggle-.git
 cd Projects--Kaggle-
+```
 2. Set Up the Environment:
 Ensure Python 3.8+ is installed.
 
