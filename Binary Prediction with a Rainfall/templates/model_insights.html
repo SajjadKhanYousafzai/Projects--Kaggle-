@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="text-center mb-4">📈 Model Insights</h1>
+    <p>Analyze the performance of the CatBoost model and explore feature importance.</p>
+    
+    <h3>Model Performance</h3>
+    <p>The CatBoost model achieved an <strong>AUC score of {{ auc_score }}</strong> on the validation set, indicating strong predictive performance.</p>
+    
+    <h3>ROC Curve</h3>
+    <img src="{{ url_for('serve_plot', filename='roc_curve.png') }}" class="img-fluid" alt="ROC Curve">
+    
+    <h3>Feature Importance</h3>
+    <p><strong>Key Features</strong>: <code>cloud_sun_ratio</code>, <code>dew_humidity/sun</code>, and <code>cloud_to_humidity</code> are the most influential, highlighting the role of cloud cover and humidity interactions in rainfall prediction.</p>
+    <img src="{{ url_for('serve_plot', filename='feature_importance.png') }}" class="img-fluid" alt="Feature Importance">
+{% endblock %}

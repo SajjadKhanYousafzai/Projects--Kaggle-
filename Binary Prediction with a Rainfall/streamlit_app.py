@@ -12,8 +12,8 @@ st.set_page_config(page_title="Rainfall Prediction App", layout="wide", initial_
 
 # Load model and scaler
 try:
-    model = pickle.load(open("./models/catboost_model.pkl", "rb"))
-    scaler = pickle.load(open("./models/scaler.pkl", "rb"))
+    model = pickle.load(open("./models/catboost_model.pkl1", "rb"))
+    scaler = pickle.load(open("./models/scaler.pkl1", "rb"))
 except FileNotFoundError:
     st.error("Model or scaler file not found. Please ensure 'catboost_model.pkl' and 'scaler.pkl' are in the directory.")
     st.stop()
