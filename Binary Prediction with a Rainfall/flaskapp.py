@@ -14,8 +14,8 @@ app = Flask(__name__)
 
 # Load model and scaler
 try:
-    model = pickle.load(open("./models/catboost_model.pkl", "rb"))
-    scaler = pickle.load(open("./models/scaler.pkl", "rb"))
+    model = pickle.load(open("./models/catboost_model1.pkl", "rb"))
+    scaler = pickle.load(open("./models/scaler1.pkl", "rb"))
 except FileNotFoundError:
     print("Error: Model or scaler file not found.")
     exit(1)
