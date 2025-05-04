@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="text-center mb-4">🌧️ Rainfall Prediction App</h1>
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <p>Welcome to the Rainfall Prediction App! This app uses a <strong>CatBoost</strong> machine learning model to predict rainfall probability based on weather data. Explore the dataset, visualize feature relationships, analyze model performance, and make predictions with custom weather inputs.</p>
+            <h3>About the Dataset</h3>
+            <ul>
+                <li><strong>Source</strong>: Generated from a deep learning model trained on the Rainfall Prediction dataset.</li>
+                <li><strong>Features</strong>: Includes pressure, temperature, humidity, cloud cover, sunshine, wind direction, and wind speed.</li>
+                <li><strong>Target</strong>: Binary rainfall indicator (0 = No Rain, 1 = Rain).</li>
+            </ul>
+            <h3>App Features</h3>
+            <ul>
+                <li><strong>Data Exploration</strong>: View dataset samples, statistics, and visualizations.</li>
+                <li><strong>Model Insights</strong>: Analyze the CatBoost model's performance and feature importance.</li>
+                <li><strong>Prediction</strong>: Input weather data to predict rainfall probability.</li>
+            </ul>
+            <p>Navigate using the top menu to get started!</p>
+            <img src="{{ url_for('static', filename='images/placeholder.png') }}" class="img-fluid rounded" alt="Rainfall Prediction">
+        </div>
+    </div>
+{% endblock %}

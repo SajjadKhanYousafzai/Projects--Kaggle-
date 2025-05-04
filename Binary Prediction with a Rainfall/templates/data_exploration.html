@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="text-center mb-4">📊 Data Exploration</h1>
+    <p>Explore the training dataset through samples, summary statistics, and visualizations to understand feature distributions and relationships.</p>
+    
+    <h3>Training Data Sample</h3>
+    {{ data_head | safe }}
+    
+    <h3>Summary Statistics</h3>
+    {{ data_describe | safe }}
+    
+    <h3>Visualizations</h3>
+    <form method="POST" class="mb-4">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="viz_type" class="form-label">Visualization Type</label>
+                <select name="viz_type" class="form-select">
+                    <option value="Histogram" {% if viz_type == 'Histogram' %}selected{% endif %}>Histogram</option>
+                    <option value="KDE Plot" {% if viz_type == 'KDE Plot' %}selected{% endif %}>KDE Plot</option>
+                    <option value="Correlation Heatmap" {% if viz_type == 'Correlation Heatmap' %}selected{% endif %}>Correlation Heatmap</option>
+                    <option value="Wind Rose" {% if viz_type == 'Wind Rose' %}selected{% endif %}>Wind Rose</option>
+                    <option value="Target Distribution" {% if viz_type == 'Target Distribution' %}selected{% endif %}>Target Distribution</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="feature" class="form-label">Feature (for Histogram/KDE)</label>
+                <select name="feature" class="form-select">
+                    {% for feature in numerical_variables %}
+                        <option value="{{ feature }}" {% if feature == selected_feature %}selected{% endif %}>{{ feature }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Generate Visualization</button>
+    </form>
+    
+    {% if viz_type == 'Histogram' %}
+        <img src="{{ url_for('serve_plot', filename='histogram.png') }}" class="img-fluid" alt="Histogram">
+    {% elif viz_type == 'KDE Plot' %}
+        <img src="{{ url_for('serve_plot', filename='kde_plot.png') }}" class="img-fluid" alt="KDE Plot">
+    {% elif viz_type == 'Correlation Heatmap' %}
+        <img src="{{ url_for('serve_plot', filename='heatmap.png') }}" class="img-fluid" alt="Correlation Heatmap">
+    {% elif viz_type == 'Wind Rose' %}
+        <img src="{{ url_for('serve_plot', filename='wind_rose.png') }}" class="img-fluid" alt="Wind Rose">
+    {% elif viz_type == 'Target Distribution' %}
+        <img src="{{ url_for('serve_plot', filename='target_distribution.png') }}" class="img-fluid" alt="Target Distribution">
+    {% endif %}
+{% endblock %}

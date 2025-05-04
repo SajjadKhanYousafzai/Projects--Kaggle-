@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="text-center mb-4">🔍 Rainfall Prediction</h1>
+    <p>Enter weather data to predict the probability of rainfall using the trained CatBoost model.</p>
+    
+    <form method="POST" class="row g-3">
+        <div class="col-md-6">
+            <label for="mintemp" class="form-label">Min Temperature (°C)</label>
+            <input type="number" step="0.1" min="0" max="50" name="mintemp" class="form-control" value="20.0" required>
+        </div>
+        <div class="col-md-6">
+            <label for="dewpoint" class="form-label">Dew Point (°C)</label>
+            <input type="number" step="0.1" min="-10" max="30" name="dewpoint" class="form-control" value="15.0" required>
+        </div>
+        <div class="col-md-6">
+            <label for="cloud" class="form-label">Cloud Cover (%)</label>
+            <input type="number" step="1" min="0" max="100" name="cloud" class="form-control" value="50.0" required>
+        </div>
+        <div class="col-md-6">
+            <label for="sunshine" class="form-label">Sunshine (hours)</label>
+            <input type="number" step="0.1" min="0" max="24" name="sunshine" class="form-control" value="5.0" required>
+        </div>
+        <div class="col-md-6">
+            <label for="windspeed" class="form-label">Wind Speed (km/h)</label>
+            <input type="number" step="0.1" min="0" max="100" name="windspeed" class="form-control" value="20.0" required>
+        </div>
+        <div class="col-md-6">
+            <label for="pressure" class="form-label">Pressure (hPa)</label>
+            <input type="number" step="0.1" min="900" max="1100" name="pressure" class="form-control" value="1015.0" required>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Predict Rainfall</button>
+        </div>
+    </form>
+    
+    {% if prediction_result %}
+        <div class="mt-4">
+            {% if prediction_result.error %}
+                <div class="alert alert-danger">{{ prediction_result.error }}</div>
+            {% else %}
+                <div class="alert alert-success">
+                    <strong>Rainfall Probability:</strong> {{ prediction_result.probability }}<br>
+                    <strong>Interpretation:</strong> {{ prediction_result.interpretation }}
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

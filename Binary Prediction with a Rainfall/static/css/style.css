@@ -1,0 +1,18 @@
+body {
+    background-color: #f8f9fa;
+}
+.navbar-brand {
+    font-weight: bold;
+}
+.table {
+    background-color: #fff;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
