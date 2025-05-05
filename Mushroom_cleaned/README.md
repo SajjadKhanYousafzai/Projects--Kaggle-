@@ -52,16 +52,6 @@ cd mushroom-classification
 pip install -r requirements.txt
 ```
 
-### Running the Analysis
-```bash
-python mushroom_analysis.py
-```
-This will:
-- Load and analyze the dataset
-- Generate visualizations
-- Train and evaluate machine learning models
-- Save the best models and necessary files for the Streamlit app
-
 ### Running the Streamlit App
 ```bash
 streamlit run stapp.py
@@ -120,5 +110,4 @@ Pillow>=8.0.0
 This project is open source and available under the [MIT License](LICENSE).
 
 ## 🙏 Acknowledgements
-- Dataset source: [provide source if applicable]
 - Inspired by real-world applications in mycology and food safety
