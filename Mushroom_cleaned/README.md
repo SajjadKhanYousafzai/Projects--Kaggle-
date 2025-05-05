@@ -16,18 +16,26 @@ The dataset (`mushroom_cleaned.csv`) contains information about various mushroom
 
 ## 📁 Project Structure
 ```
+Mushroom_cleaned/
 ├── dataset/
-│   └── mushroom_cleaned.csv
-├── mushroom_analysis.py       # Analysis notebook
-├── stapp.py                   # Streamlit application
-├── random_forest_model.joblib # Best performing model
-├── logistic_regression_model.joblib  
-├── gradient_boosting_model.joblib
-├── k_nearest_neighbors_model.joblib
-├── standard_scaler.joblib     # Feature scaler
-├── feature_names.joblib       # Encoded feature names (important!)
-└── visualizations/            # Generated visualizations
+│   └── mushroom_cleaned.csv           # Preprocessed dataset
+├── images/                            # Static images for documentation or UI
+├── models/                            # Contains saved models and scalers
+│   ├── random_forest_model.joblib
+│   ├── logistic_regression_model.joblib
+│   ├── gradient_boosting_model.joblib
+│   ├── k_nearest_neighbors_model.joblib
+│   ├── standard_scaler.joblib         # Scaler used for preprocessing
+│   └── feature_names.joblib           # Encoded feature names used for prediction
+├── visualizations/                    # Contains plots/graphs used in analysis or UI
+├── 12.ipynb                           # Additional notebook (possibly experimental)
+├── mushroom.ipynb                     # Main Jupyter notebook for EDA & modeling
+├── mushroom_analysis.py               # (Rename if this script exists separately for clarity)
+├── stapp.py                           # Streamlit app for mushroom classification
+├── requirements.txt                   # Dependencies for the project
+└── README.md                          # Project overview and instructions
 ```
+
 
 ## 🚀 Getting Started
 
