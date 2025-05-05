@@ -27,10 +27,7 @@ Mushroom_cleaned/
 │   ├── k_nearest_neighbors_model.joblib
 │   ├── standard_scaler.joblib         # Scaler used for preprocessing
 │   └── feature_names.joblib           # Encoded feature names used for prediction
-├── visualizations/                    # Contains plots/graphs used in analysis or UI
-├── 12.ipynb                           # Additional notebook (possibly experimental)
 ├── mushroom.ipynb                     # Main Jupyter notebook for EDA & modeling
-├── mushroom_analysis.py               # (Rename if this script exists separately for clarity)
 ├── stapp.py                           # Streamlit app for mushroom classification
 ├── requirements.txt                   # Dependencies for the project
 └── README.md                          # Project overview and instructions
