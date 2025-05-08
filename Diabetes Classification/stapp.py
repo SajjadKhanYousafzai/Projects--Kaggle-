@@ -92,30 +92,34 @@ if st.button("Predict Diabetes Risk"):
         'age': age
     }
     
-    prediction, probability = predict_diabetes(input_data)
-    
-    # Display results
-    st.subheader("Prediction Result")
-    if prediction == 1:
-        st.error(f"⚠️ High Risk: The patient is likely to have diabetes (Probability: {probability:.2%})")
-        st.markdown("**Recommendation:** Consult a healthcare professional for further evaluation.")
-    else:
-        st.success(f"✅ Low Risk: The patient is unlikely to have diabetes (Probability: {probability:.2%})")
-        st.markdown("**Recommendation:** Maintain a healthy lifestyle to prevent future risk.")
-    
-    # Display feature importance (if available)
-    if hasattr(model, 'feature_importances_'):
-        st.subheader("Feature Importance")
-        importance = pd.DataFrame({
-            'Feature': feature_names,
-            'Importance': model.feature_importances_
-        }).sort_values('Importance', ascending=True)
+    with st.spinner('Analyzing patient characteristics...'):
+        prediction, probability = predict_diabetes(input_data)
         
-        fig, ax = plt.subplots(figsize=(10, 6))
-        sns.barplot(x='Importance', y='Feature', data=importance)
-        plt.title('Feature Importance in Diabetes Prediction')
-        plt.tight_layout()
-        st.pyplot(fig)
+        # Display results
+        st.subheader("Prediction Result")
+        if prediction == 1:
+            st.error(f"⚠️ High Risk: The patient is likely to have diabetes (Probability: {probability:.2%})")
+            st.markdown("**Recommendation:** Consult a healthcare professional for further evaluation.")
+        else:
+            st.success(f"✅ Low Risk: The patient is unlikely to have diabetes (Probability: {probability:.2%})")
+            st.markdown("**Recommendation:** Maintain a healthy lifestyle to prevent future risk.")    
+        
+        # Display disclaimer
+        st.warning("⚠️ **Important Disclaimer**: This application is for educational purposes only. Diabetes predictions should not be used for medical diagnosis. Consult a healthcare professional for medical advice.")
+        
+        # Display feature importance (if available)
+        if hasattr(model, 'feature_importances_'):
+            st.subheader("Feature Importance")
+            importance = pd.DataFrame({
+                'Feature': feature_names,
+                'Importance': model.feature_importances_
+            }).sort_values('Importance', ascending=True)
+            
+            fig, ax = plt.subplots(figsize=(10, 6))
+            sns.barplot(x='Importance', y='Feature', data=importance)
+            plt.title('Feature Importance in Diabetes Prediction')
+            plt.tight_layout()
+            st.pyplot(fig)
 
 # Add footer
 st.markdown("---")
