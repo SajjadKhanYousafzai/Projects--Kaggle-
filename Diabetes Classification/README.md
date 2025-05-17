@@ -1,3 +1,5 @@
+![Project Banner](assets/Diabetes.png)
+
 # 📈 Diabetes Prediction Project
 
 ## Project Overview
