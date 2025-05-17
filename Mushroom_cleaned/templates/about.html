@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block content %}
+<div class="text-center mb-4">
+    <h1 class="display-4 text-success">ℹ️ About This Project</h1>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <h2 class="h4 text-success">🍄 Mushroom Classification Project</h2>
+        <p>This application uses machine learning to classify mushrooms as edible or poisonous based on their physical characteristics. The models were trained on a dataset of mushroom samples with various features including cap diameter, stem dimensions, colors, and seasonal information.</p>
+        
+        <h3 class="h5 text-success mt-4">📊 Dataset</h3>
+        <p>The dataset contains information about various mushroom species, labeled as either edible (1) or poisonous (0). The features include:</p>
+        <ul>
+            <li><strong>Cap diameter</strong>: Size of the mushroom cap in centimeters</li>
+            <li><strong>Cap shape</strong>: Shape classification of the mushroom cap</li>
+            <li><strong>Gill attachment</strong>: How the gills are attached to the stem</li>
+            <li><strong>Gill color</strong>: Color of the gills under the cap</li>
+            <li><strong>Stem height</strong>: Height of the mushroom stem in centimeters</li>
+            <li><strong>Stem width</strong>: Width of the mushroom stem in centimeters</li>
+            <li><strong>Stem color</strong>: Color of the mushroom stem</li>
+            <li><strong>Season</strong>: Season when the mushroom typically grows</li>
+        </ul>
+        
+        <h3 class="h5 text-success mt-4">🤖 Machine Learning Models</h3>
+        <p>Several classification models were trained and evaluated:</p>
+        <ul>
+            <li><strong>Random Forest</strong>: Best performing model with excellent accuracy</li>
+            <li><strong>Logistic Regression</strong>: Simple yet effective baseline model</li>
+            <li><strong>Gradient Boosting</strong>: Advanced ensemble learning method</li>
+            <li><strong>K-Nearest Neighbors</strong>: Instance-based learning algorithm</li>
+        </ul>
+        
+        <h3 class="h5 text-success mt-4">⚠️ Important Disclaimer</h3>
+        <p class="alert alert-warning">This application is for educational purposes only. Never consume wild mushrooms based solely on this classification. Always consult with a mushroom expert or mycologist for proper identification before consuming any wild mushrooms. Misidentification can lead to serious illness or death.</p>
+        
+        <h3 class="h5 text-success mt-4">🔍 How to Use</h3>
+        <ol>
+            <li>Navigate to the <a href="/">Classifier</a> page</li>
+            <li>Enter the mushroom's characteristics using the sliders and dropdown menus</li>
+            <li>Click the "Predict Mushroom Type" button</li>
+            <li>View the prediction results and confidence levels</li>
+        </ol>
+        
+        <h3 class="h5 text-success mt-4">📈 Visualizations</h3>
+        <p>The <a href="/visualizations">Visualizations</a> page provides various charts and graphs showing the distribution of features in the dataset, relationships between variables, and model performance metrics.</p>
+        
+        <h3 class="h5 text-success mt-4">🧪 Project Methodology</h3>
+        <ol>
+            <li>Data cleaning and exploratory analysis</li>
+            <li>Feature engineering and preprocessing</li>
+            <li>Model training and evaluation</li>
+            <li>Selection of the best performing model</li>
+            <li>Development of this interactive application</li>
+        </ol>
+        
+        <h3 class="h5 text-success mt-4">📚 Learn More</h3>
+        <p>To learn more about mushroom identification, please consult official mycology resources and field guides.</p>
+    </div>
+</div>
+{% endblock %}

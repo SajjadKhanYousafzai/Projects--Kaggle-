@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}Mushroom Classifier{% endblock %}
+{% block content %}
+<div class="text-center mb-4">
+    <h1 class="display-4 text-success">🍄 Mushroom Classification</h1>
+    <p class="lead text-light">Predict whether a mushroom is edible or poisonous</p>
+</div>
+
+<div class="card shadow">
+    <div class="card-header bg-success text-white">
+        <h2 class="h4 mb-0">Enter Mushroom Characteristics</h2>
+    </div>
+    <div class="card-body">
+        <form id="predict-form">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="h5 text-success">Physical Characteristics</h3>
+                    <div class="mb-3">
+                        <label for="cap-diameter" class="form-label">Cap Diameter (cm)</label>
+                        <input type="range" class="form-range" id="cap-diameter" name="cap-diameter"
+                               min="{{ form_data.cap_diameter.min }}" max="{{ form_data.cap_diameter.max }}"
+                               value="{{ form_data.cap_diameter.value }}" step="0.1"
+                               oninput="document.getElementById('cap-diameter-value').textContent = this.value">
+                        <span id="cap-diameter-value">{{ form_data.cap_diameter.value }}</ BAMBOO
+                    </div>
+                    <div class="mb-3">
+                        <label for="cap-shape" class="form-label">Cap Shape</label>
+                        <select class="form-select" id="cap-shape" name="cap-shape">
+                            {% for shape in form_data.cap_shapes %}
+                            <option value="{{ shape }}">{{ shape }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gill-attachment" class="form-label">Gill Attachment</label>
+                        <select class="form-select" id="gill-attachment" name="gill-attachment">
+                            {% for attachment in form_data.gill_attachments %}
+                            <option value="{{ attachment }}">{{ attachment }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gill-color" class="form-label">Gill Color</label>
+                        <select class="form-select" id="gill-color" name="gill-color">
+                            {% for color in form_data.gill_colors %}
+                            <option value="{{ color }}">{{ color }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="h5 text-success">Additional Features</h3>
+                    <div class="mb-3">
+                        <label for="stem-height" class="form-label">Stem Height (cm)</label>
+                        <input type="range" class="form-range" id="stem-height" name="stem-height"
+                               min="{{ form_data.stem_height.min }}" max="{{ form_data.stem_height.max }}"
+                               value="{{ form_data.stem_height.value }}" step="0.1"
+                               oninput="document.getElementById('stem-height-value').textContent = this.value">
+                        <span id="stem-height-value">{{ form_data.stem_height.value }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stem-width" class="form-label">Stem Width (cm)</label>
+                        <input type="range" class="form-range" id="stem-width" name="stem-width"
+                               min="{{ form_data.stem_width.min }}" max="{{ form_data.stem_width.max }}"
+                               value="{{ form_data.stem_width.value }}" step="0.1"
+                               oninput="document.getElementById('stem-width-value').textContent = this.value">
+                        <span id="stem-width-value">{{ form_data.stem_width.value }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stem-color" class="form-label">Stem Color</label>
+                        <select class="form-select" id="stem-color" name="stem-color">
+                            {% for color in form_data.stem_colors %}
+                            <option value="{{ color }}">{{ color }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="season" class="form-label">Growing Season</label>
+                        <select class="form-select" id="season" name="season">
+                            {% for season in form_data.seasons %}
+                            <option value="{{ season }}">{{ season }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-lg w-100">🔍 Predict Mushroom Type</button>
+        </form>
+    </div>
+</div>
+
+<div id="results" class="mt-4" style="display: none;">
+    <h2 class="h4 text-success">Prediction Results</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h3 class="h5 mb-0">Random Forest Prediction</h3>
+                </div>
+                <div class="card-body text-center">
+                    <div id="rf-result" class="result-text"></div>
+                    <p id="rf-confidence" class="mt-2"></p>
+                    <img id="rf-gauge" class="img-fluid" alt="Random Forest Probability Gauge">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h3 class="h5 mb-0">Logistic Regression Prediction</h3>
+                </div>
+                <div class="card-body text-center">
+                    <div id="lr-result" class="result-text"></div>
+                    <p id="lr-confidence" class="mt-2"></p>
+                    <img id="lr-gauge" class="img-fluid" alt="Logistic Regression Probability Gauge">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-warning mt-4" role="alert">
+        ⚠️ <strong>Important Disclaimer</strong>: This tool is for educational purposes only. Never consume wild mushrooms based solely on this classification. Always consult with a mushroom expert or mycologist for proper identification.
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Visualizations{% endblock %}
+{% block content %}
+<div class="text-center mb-4">
+    <h1 class="display-4 text-success">📊 Dataset Visualizations</h1>
+</div>
+
+<ul class="nav nav-tabs mb-4">
+    <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#distribution">Distribution</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#relationships">Relationships</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#model-performance">Model Performance</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="distribution">
+        <h2 class="h4 text-success">Class Distribution</h2>
+        {% if visualizations.class_distribution %}
+        <img src="data:image/png;base64,{{ visualizations.class_distribution }}" class="img-fluid" alt="Class Distribution">
+        {% else %}
+        <p class="text-muted">Class distribution visualization not available.</p>
+        {% endif %}
+        
+        <h2 class="h4 text-success mt-4">Numerical Features Distribution</h2>
+        {% if visualizations.numerical_distributions %}
+        <img src="data:image/png;base64,{{ visualizations.numerical_distributions }}" class="img-fluid" alt="Numerical Distributions">
+        {% else %}
+        <p class="text-muted">Numerical distributions visualization not available.</p>
+        {% endif %}
+    </div>
+    
+    <div class="tab-pane fade" id="relationships">
+        <h2 class="h4 text-success">Feature Relationships</h2>
+        {% if visualizations.numerical_boxplots_by_class %}
+        <img src="data:image/png;base64,{{ visualizations.numerical_boxplots_by_class }}" class="img-fluid" alt="Numerical Boxplots by Class">
+        {% else %}
+        <p class="text-muted">Numerical boxplots visualization not available.</p>
+        {% endif %}
+        
+        <h2 class="h4 text-success mt-4">Feature Correlation</h2>
+        {% if visualizations.correlation_heatmap %}
+        <img src="data:image/png;base64,{{ visualizations.correlation_heatmap }}" class="img-fluid" alt="Correlation Heatmap">
+        {% else %}
+        <p class="text-muted">Correlation heatmap visualization not available.</p>
+        {% endif %}
+    </div>
+    
+    <div class="tab-pane fade" id="model-performance">
+        <h2 class="h4 text-success">Model Performance Comparison</h2>
+        {% if visualizations.model_accuracy_comparison %}
+        <img src="data:image/png;base64,{{ visualizations.model_accuracy_comparison }}" class="img-fluid" alt="Model Accuracy Comparison">
+        {% else %}
+        <p class="text-muted">Model accuracy comparison visualization not available.</p>
+        {% endif %}
+        
+        <h2 class="h4 text-success mt-4">Confusion Matrices</h2>
+        <div class="row">
+            <div class="col-md-6">
+                {% if visualizations.confusion_matrix_random_forest %}
+                <img src="data:image/png;base64,{{ visualizations.confusion_matrix_random_forest }}" class="img-fluid" alt="Random Forest Confusion Matrix">
+                {% else %}
+                <p class="text-muted">Random Forest confusion matrix not available.</p>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                {% if visualizations.confusion_matrix_logistic_regression %}
+                <img src="data:image/png;base64,{{ visualizations.confusion_matrix_logistic_regression }}" class="img-fluid" alt="Logistic Regression Confusion Matrix">
+                {% else %}
+                <p class="text-muted">Logistic Regression confusion matrix not available.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -37,7 +37,7 @@ st.markdown("""
     .subtitle-text {
         font-size: 1.5rem;
         font-weight: 500;
-        color: #388E3C;
+        color: #FFFDF6;
         text-align: center;
     }
     .section-header {
