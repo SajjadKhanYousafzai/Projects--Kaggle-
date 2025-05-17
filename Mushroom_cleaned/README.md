@@ -1,3 +1,5 @@
+![Project Banner](assets/first.png)
+![Project Banner](assets/second.png)
 # 🍄 Mushroom Classification Project
 
 ## Project Overview
@@ -16,21 +18,39 @@ The dataset (`mushroom_cleaned.csv`) contains information about various mushroom
 
 ## 📁 Project Structure
 ```
-Mushroom_cleaned/
-├── dataset/
-│   └── mushroom_cleaned.csv           # Preprocessed dataset
-├── images/                            # Static images for documentation or UI
-├── models/                            # Contains saved models and scalers
-│   ├── random_forest_model.joblib
-│   ├── logistic_regression_model.joblib
+mushroom_classifier_flask/
+├── app.py                          # Main Flask application script
+├── dataset/                        # Directory for the dataset
+│   └── mushroom_cleaned.csv        # Preprocessed dataset
+├── images/                         # Directory for static images (optional)
+├── models/                         # Directory for saved models and scalers
+│   ├── feature_names.joblib
 │   ├── gradient_boosting_model.joblib
 │   ├── k_nearest_neighbors_model.joblib
-│   ├── standard_scaler.joblib         # Scaler used for preprocessing
-│   └── feature_names.joblib           # Encoded feature names used for prediction
-├── mushroom.ipynb                     # Main Jupyter notebook for EDA & modeling
-├── stapp.py                           # Streamlit app for mushroom classification
-├── requirements.txt                   # Dependencies for the project
-└── README.md                          # Project overview and instructions
+│   ├── logistic_regression_model.joblib
+│   ├── random_forest_model.joblib
+│   └── standard_scaler1.joblib
+├── static/                         # Directory for static assets
+│   ├── css/
+│   │   └── styles.css              # Custom CSS for styling
+│   ├── js/
+│   │   └── scripts.js              # JavaScript for interactivity
+├── templates/                      # Directory for HTML templates
+│   ├── about.html
+│   ├── base.html
+│   ├── index.html
+│   └── visualizations.html
+├── Mushroom.ipynb                  # Jupyter notebook for EDA & modeling
+├── requirements.txt                # Dependencies for the project
+├── README.md                       # Project overview and instructions
+├── class_distribution.png          # Visualization image (optional)
+├── numerical_distributions.png     # Visualization image (optional)
+├── numerical_boxplots_by_class.png # Visualization image (optional)
+├── correlation_heatmap.png         # Visualization image (optional)
+├── model_accuracy_comparison.png   # Visualization image (optional)
+├── confusion_matrix_random_forest.png # Visualization image (optional)
+├── confusion_matrix_logistic_regression.png # Visualization image (optional)
+
 ```
 
 
