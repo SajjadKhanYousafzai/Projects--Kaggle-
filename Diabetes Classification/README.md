@@ -47,6 +47,7 @@ Numerical features are scaled using `StandardScaler`.
 
 ```bash
 Diabetes_Prediction/
+├── assets/Diabetes.png
 ├── dataset/
 │   └── diabetes.csv                  # Diabetes dataset
 ├── models/
@@ -55,7 +56,7 @@ Diabetes_Prediction/
 │   └── feature_names.pkl            # Feature names (if saved)
 ├── plots/                           # Generated visualizations (e.g., PNGs)
 ├── templates/                       # HTML templates for Flask app
-├── Diabetes_Prediction.ipynb        # Main Jupyter notebook for diabetes prediction
+├── Diabetes.ipynb                   # Main Jupyter notebook for diabetes 
 ├── flask_app.py                     # Flask app for serving predictions
 ├── stapp.py                         # Streamlit app for interactive visualization
 ├── requirements.txt                 # Dependencies for the project
@@ -169,5 +170,5 @@ This project is open source and available under the MIT License.
 ## 🙏 Acknowledgements
 
 * **Dataset**: Diabetes Dataset from Kaggle.
-* **Author**: Sajjad Ali Shah ([LinkedIn](https://www.linkedin.com))
+* **Author**: Sajjad Ali Shah ([LinkedIn](https://www.linkedin.com/in/sajjad-ali-shah47/))
 * **Inspiration**: Data science communities and tools like Jupyter, Flask, and Streamlit.
