@@ -25,7 +25,7 @@ Below is a list of my Kaggle projects, each with a brief description and the tec
 
 ## Setup Instructions
 
-To run these projects locally (e.g., Jupyter notebooks or the Flask app for "Binary Prediction with a Rainfall"), follow these steps:
+To run these projects locally (e.g., Jupyter notebooks or the Flask app for "Binary Prediction with a Rainfall"), follow these stepss:
 
 ### 1. Clone the Repository:
 
