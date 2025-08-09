@@ -1,0 +1,22 @@
+# Core Data Science Libraries
+pandas
+numpy
+matplotlib
+seaborn
+
+# Machine Learning Libraries
+scikit-learn
+
+# Natural Language Processing Libraries
+nltk
+textblob
+wordcloud
+
+# Visualization Libraries
+plotly
+
+# Text Processing Libraries
+tqdm
+
+# Utility Libraries
+joblib
