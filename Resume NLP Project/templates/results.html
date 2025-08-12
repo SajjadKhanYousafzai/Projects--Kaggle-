@@ -1,0 +1,301 @@
+{% extends "base.html" %}
+
+{% block title %}Analysis Results - Resume Classifier{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Results Header -->
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">
+            <i class="fas fa-chart-bar text-success me-3"></i>
+            Analysis Results
+        </h1>
+        <p class="lead text-muted">AI-powered resume analysis complete</p>
+    </div>
+
+    <!-- Main Results Card -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 result-card">
+                <div class="card-header bg-gradient-{% if result.confidence_score > 0.7 %}success{% elif result.confidence_score > 0.5 %}warning{% else %}danger{% endif %} text-white">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h4 class="mb-0">
+                                <i class="fas fa-{% if result.confidence_score > 0.7 %}check-circle{% elif result.confidence_score > 0.5 %}exclamation-triangle{% else %}times-circle{% endif %} me-2"></i>
+                                {{ result.prediction }}
+                            </h4>
+                        </div>
+                        <div class="col-auto">
+                            <div class="confidence-badge">
+                                <span class="confidence-number">{{ result.confidence }}</span>
+                                <small>Confidence</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Confidence Progress Bar -->
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="fw-bold">Match Confidence</span>
+                            <span class="text-muted">{{ result.confidence }}</span>
+                        </div>
+                        <div class="progress" style="height: 12px;">
+                            <div class="progress-bar bg-gradient-{% if result.confidence_score > 0.7 %}success{% elif result.confidence_score > 0.5 %}warning{% else %}danger{% endif %}" 
+                                 style="width: {{ result.confidence_score * 100 }}%">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analysis Summary -->
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="stat-box">
+                                <div class="stat-icon bg-primary">
+                                    <i class="fas fa-file-alt text-white"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-number">{{ result.original_length }}</div>
+                                    <div class="stat-label">Original Characters</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="stat-box">
+                                <div class="stat-icon bg-success">
+                                    <i class="fas fa-compress-alt text-white"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-number">{{ result.processed_length }}</div>
+                                    <div class="stat-label">Processed Characters</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feature Analysis -->
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Feature Visualization -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-bar text-primary me-2"></i>
+                        Feature Analysis
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if result.plot_url %}
+                        <img src="data:image/png;base64,{{ result.plot_url }}" 
+                             class="img-fluid rounded" 
+                             alt="Feature Analysis Chart">
+                    {% else %}
+                        <div class="text-center text-muted py-5">
+                            <i class="fas fa-chart-bar fa-3x mb-3"></i>
+                            <p>Feature visualization not available</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Processed Text Preview -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-eye text-info me-2"></i>
+                        Processed Text Preview
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="processed-text">
+                        {{ result.processed_text }}
+                    </div>
+                    {% if result.processed_text.endswith('...') %}
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Text truncated for display. Full text was processed for analysis.
+                        </small>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Feature Details -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-list text-secondary me-2"></i>
+                        Extracted Features
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="feature-list">
+                        {% for feature, value in result.features.items() %}
+                        <div class="feature-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="feature-name">{{ feature.replace('_', ' ').title() }}</span>
+                                <span class="feature-value">{{ "%.1f"|format(value) }}</span>
+                            </div>
+                            <div class="feature-bar">
+                                <div class="feature-progress" style="width: {{ (value / (result.features.values() | list | max)) * 100 }}%"></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analysis Metadata -->
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle text-warning me-2"></i>
+                        Analysis Details
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="metadata-item">
+                        <i class="fas fa-clock text-muted me-2"></i>
+                        <strong>Analyzed at:</strong><br>
+                        <small class="text-muted">{{ result.timestamp }}</small>
+                    </div>
+                    <hr>
+                    <div class="metadata-item">
+                        <i class="fas fa-robot text-muted me-2"></i>
+                        <strong>Model:</strong><br>
+                        <small class="text-muted">Logistic Regression (F1: 63.49%)</small>
+                    </div>
+                    <hr>
+                    <div class="metadata-item">
+                        <i class="fas fa-cogs text-muted me-2"></i>
+                        <strong>Features:</strong><br>
+                        <small class="text-muted">11 statistical text features</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="text-center mt-5">
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="{{ url_for('predict') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-redo me-2"></i>
+                Analyze Another Resume
+            </a>
+            <button class="btn btn-outline-secondary btn-lg" onclick="window.print()">
+                <i class="fas fa-print me-2"></i>
+                Print Results
+            </button>
+            <button class="btn btn-outline-info btn-lg" onclick="copyResults()">
+                <i class="fas fa-copy me-2"></i>
+                Copy Summary
+            </button>
+        </div>
+    </div>
+
+    <!-- Recommendations -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-8">
+            <div class="card border-0 bg-light">
+                <div class="card-body p-4">
+                    <h5 class="card-title">
+                        <i class="fas fa-lightbulb text-warning me-2"></i>
+                        Recommendations
+                    </h5>
+                    <div class="recommendations">
+                        {% if result.confidence_score > 0.7 %}
+                            <div class="alert alert-success border-0">
+                                <i class="fas fa-thumbs-up me-2"></i>
+                                <strong>Excellent match!</strong> Your resume shows strong alignment with job requirements.
+                            </div>
+                        {% elif result.confidence_score > 0.5 %}
+                            <div class="alert alert-warning border-0">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <strong>Good potential.</strong> Consider highlighting more relevant skills and experience.
+                            </div>
+                        {% else %}
+                            <div class="alert alert-info border-0">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Room for improvement.</strong> Focus on adding more relevant keywords and skills.
+                            </div>
+                        {% endif %}
+                        
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="fas fa-check text-success me-2"></i>Include more technical skills and certifications</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Quantify achievements with specific numbers</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Use industry-relevant keywords</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Keep content concise but comprehensive</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function copyResults() {
+    const summary = `Resume Analysis Results
+========================
+Match: {{ result.prediction }}
+Confidence: {{ result.confidence }}
+Analysis Date: {{ result.timestamp }}
+
+Features Extracted:
+{% for feature, value in result.features.items() %}- {{ feature.replace('_', ' ').title() }}: {{ "%.1f"|format(value) }}
+{% endfor %}
+
+Generated by Resume Classifier AI`;
+
+    navigator.clipboard.writeText(summary).then(function() {
+        // Show success message
+        const btn = event.target.closest('button');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check me-2"></i>Copied!';
+        btn.classList.remove('btn-outline-info');
+        btn.classList.add('btn-success');
+        
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.classList.remove('btn-success');
+            btn.classList.add('btn-outline-info');
+        }, 2000);
+    }).catch(function(err) {
+        alert('Could not copy to clipboard. Please try again.');
+    });
+}
+
+// Animate results on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Animate confidence bar
+    const progressBar = document.querySelector('.progress-bar');
+    if (progressBar) {
+        const width = progressBar.style.width;
+        progressBar.style.width = '0%';
+        setTimeout(() => {
+            progressBar.style.transition = 'width 1s ease-in-out';
+            progressBar.style.width = width;
+        }, 500);
+    }
+
+    // Animate feature bars
+    const featureBars = document.querySelectorAll('.feature-progress');
+    featureBars.forEach((bar, index) => {
+        const width = bar.style.width;
+        bar.style.width = '0%';
+        setTimeout(() => {
+            bar.style.transition = 'width 0.8s ease-in-out';
+            bar.style.width = width;
+        }, 700 + (index * 100));
+    });
+});
+</script>
+{% endblock %}

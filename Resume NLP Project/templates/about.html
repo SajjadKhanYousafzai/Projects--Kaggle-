@@ -1,0 +1,336 @@
+{% extends "base.html" %}
+
+{% block title %}About - Resume Classifier{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">
+            <i class="fas fa-info-circle text-primary me-3"></i>
+            About Resume Classifier
+        </h1>
+        <p class="lead text-muted">
+            AI-powered resume analysis using advanced NLP and machine learning
+        </p>
+    </div>
+
+    <!-- Project Overview -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-project-diagram me-2"></i>
+                        Project Overview
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="lead">
+                                This Resume Classification system leverages cutting-edge Natural Language Processing 
+                                and Machine Learning techniques to automatically analyze and classify resumes with 
+                                high accuracy and reliability.
+                            </p>
+                            <p>
+                                Built using advanced text preprocessing, feature engineering, and multiple ML algorithms, 
+                                the system provides instant insights into resume-job matching with detailed analysis 
+                                and confidence scores.
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="tech-stack">
+                                <h6 class="fw-bold mb-3">Technology Stack</h6>
+                                <div class="tech-badges">
+                                    <span class="badge bg-primary me-2 mb-2">Python</span>
+                                    <span class="badge bg-success me-2 mb-2">Flask</span>
+                                    <span class="badge bg-info me-2 mb-2">NLTK</span>
+                                    <span class="badge bg-warning text-dark me-2 mb-2">Bootstrap</span>
+                                    <span class="badge bg-secondary me-2 mb-2">JavaScript</span>
+                                    <span class="badge bg-dark me-2 mb-2">HTML/CSS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technical Details -->
+    <div class="row g-4 mb-5">
+        <div class="col-lg-6">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-brain text-success me-2"></i>
+                        Machine Learning Pipeline
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="pipeline-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h6>Data Preprocessing</h6>
+                            <p class="text-muted">Text normalization, cleaning, stopword removal</p>
+                        </div>
+                    </div>
+                    <div class="pipeline-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h6>Feature Engineering</h6>
+                            <p class="text-muted">Statistical and linguistic feature extraction</p>
+                        </div>
+                    </div>
+                    <div class="pipeline-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h6>Model Training</h6>
+                            <p class="text-muted">Cross-validation with multiple algorithms</p>
+                        </div>
+                    </div>
+                    <div class="pipeline-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h6>Prediction</h6>
+                            <p class="text-muted">Classification with confidence scoring</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-bar text-warning me-2"></i>
+                        Model Performance
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="metric-card">
+                                <div class="metric-value text-success">63.49%</div>
+                                <div class="metric-label">F1-Score</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="metric-card">
+                                <div class="metric-value text-primary">53.83%</div>
+                                <div class="metric-label">Accuracy</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="metric-card">
+                                <div class="metric-value text-info">55.27%</div>
+                                <div class="metric-label">Precision</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="metric-card">
+                                <div class="metric-value text-warning">74.59%</div>
+                                <div class="metric-label">Recall</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="training-info">
+                        <h6 class="fw-bold mb-2">Training Details</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-database text-muted me-2"></i>9,544 resume samples</li>
+                            <li><i class="fas fa-cogs text-muted me-2"></i>11 engineered features</li>
+                            <li><i class="fas fa-sync text-muted me-2"></i>5-fold cross-validation</li>
+                            <li><i class="fas fa-trophy text-muted me-2"></i>Logistic Regression (best model)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10">
+            <h2 class="text-center mb-4">Key Features</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card text-center h-100">
+                        <div class="feature-icon bg-primary mb-3">
+                            <i class="fas fa-language text-white"></i>
+                        </div>
+                        <h5>Advanced NLP</h5>
+                        <p class="text-muted">
+                            Sophisticated text preprocessing including stemming, lemmatization, 
+                            and stopword removal for optimal feature extraction.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card text-center h-100">
+                        <div class="feature-icon bg-success mb-3">
+                            <i class="fas fa-microscope text-white"></i>
+                        </div>
+                        <h5>Statistical Analysis</h5>
+                        <p class="text-muted">
+                            Extraction of 11 key statistical features including text length, 
+                            word count, lexical diversity, and linguistic patterns.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card text-center h-100">
+                        <div class="feature-icon bg-info mb-3">
+                            <i class="fas fa-tachometer-alt text-white"></i>
+                        </div>
+                        <h5>Real-time Processing</h5>
+                        <p class="text-muted">
+                            Instant analysis and classification with confidence scoring 
+                            and detailed feature visualization.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Algorithm Comparison -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-balance-scale text-secondary me-2"></i>
+                        Algorithm Comparison
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Algorithm</th>
+                                    <th>Accuracy</th>
+                                    <th>F1-Score</th>
+                                    <th>Training Time</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-success">
+                                    <td><strong>Logistic Regression</strong></td>
+                                    <td>54.10%</td>
+                                    <td><strong>65.11%</strong></td>
+                                    <td>4.68s</td>
+                                    <td><span class="badge bg-success">Best Model</span></td>
+                                </tr>
+                                <tr>
+                                    <td>K-Nearest Neighbors</td>
+                                    <td>61.84%</td>
+                                    <td>64.32%</td>
+                                    <td>673.81s</td>
+                                    <td><span class="badge bg-warning text-dark">High Accuracy</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Naive Bayes</td>
+                                    <td>50.25%</td>
+                                    <td>29.55%</td>
+                                    <td>0.55s</td>
+                                    <td><span class="badge bg-info">Fast</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Decision Tree</td>
+                                    <td>59.52%</td>
+                                    <td>0.00%</td>
+                                    <td>8.81s</td>
+                                    <td><span class="badge bg-danger">Poor F1</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Developer Info -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 bg-light">
+                <div class="card-body text-center p-4">
+                    <div class="developer-avatar mb-3">
+                        <i class="fas fa-user-circle fa-4x text-primary"></i>
+                    </div>
+                    <h4 class="fw-bold">Sajjad Ali Shah</h4>
+                    <p class="text-muted mb-3">
+                        Data Scientist & Machine Learning Engineer
+                    </p>
+                    <p>
+                        Passionate about leveraging AI and machine learning to solve real-world problems. 
+                        This project demonstrates advanced NLP techniques and web development skills.
+                    </p>
+                    <div class="social-links mt-4">
+                        <a href="https://www.linkedin.com/in/sajjad-ali-shah47/" class="btn btn-outline-primary me-2" target="_blank">
+                            <i class="fab fa-linkedin-in me-1"></i>LinkedIn
+                        </a>
+                        <a href="https://github.com/SajjadKhanYousafzai" class="btn btn-outline-dark me-2" target="_blank">
+                            <i class="fab fa-github me-1"></i>GitHub
+                        </a>
+                        <a href="mailto:contact@example.com" class="btn btn-outline-secondary">
+                            <i class="fas fa-envelope me-1"></i>Contact
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Animate metrics on scroll
+document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateMetrics();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    const metricsSection = document.querySelector('.row.g-3');
+    if (metricsSection) {
+        observer.observe(metricsSection);
+    }
+});
+
+function animateMetrics() {
+    const metricValues = document.querySelectorAll('.metric-value');
+    metricValues.forEach((metric, index) => {
+        const finalValue = metric.textContent;
+        metric.textContent = '0%';
+        
+        setTimeout(() => {
+            metric.textContent = finalValue;
+            metric.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                metric.style.transform = 'scale(1)';
+            }, 200);
+        }, index * 200);
+    });
+}
+</script>
+{% endblock %}

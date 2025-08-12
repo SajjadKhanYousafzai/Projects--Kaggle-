@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+
+{% block title %}Predict Resume Match - Resume Classifier{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold">
+                    <i class="fas fa-brain text-primary me-3"></i>
+                    Resume Analysis
+                </h1>
+                <p class="lead text-muted">
+                    Paste your resume content below to get an AI-powered analysis
+                </p>
+            </div>
+
+            <!-- Prediction Form -->
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-file-alt me-2"></i>
+                        Enter Resume Content
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" id="resumeForm">
+                        <div class="mb-4">
+                            <label for="resume_text" class="form-label fw-bold">
+                                Resume Text <span class="text-danger">*</span>
+                            </label>
+                            <textarea 
+                                class="form-control" 
+                                id="resume_text" 
+                                name="resume_text" 
+                                rows="12" 
+                                placeholder="Paste your complete resume content here...
+
+Example:
+John Doe
+Data Scientist
+Email: john.doe@email.com
+Phone: (555) 123-4567
+
+EXPERIENCE:
+- 3 years of experience in machine learning and data analysis
+- Proficient in Python, R, SQL, and TensorFlow
+- Led projects involving predictive modeling and statistical analysis
+
+EDUCATION:
+- Master's in Data Science from XYZ University
+- Bachelor's in Computer Science
+
+SKILLS:
+- Machine Learning, Deep Learning, NLP
+- Python, pandas, scikit-learn, matplotlib
+- SQL, MongoDB, AWS"
+                                required
+                            >{{ request.form.resume_text if request.form.resume_text }}</textarea>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Include all relevant sections: experience, education, skills, etc.
+                            </div>
+                        </div>
+
+                        <!-- Character Counter -->
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <span id="charCount">0</span> characters
+                                </small>
+                                <small class="text-muted">
+                                    Recommended: 500-3000 characters
+                                </small>
+                            </div>
+                            <div class="progress" style="height: 4px;">
+                                <div class="progress-bar" id="charProgress" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg" id="analyzeBtn">
+                                <span class="btn-text">
+                                    <i class="fas fa-search me-2"></i>
+                                    Analyze Resume
+                                </span>
+                                <span class="btn-loading d-none">
+                                    <span class="spinner-border spinner-border-sm me-2"></span>
+                                    Analyzing...
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Sample Resume -->
+            <div class="card mt-4 border-0 bg-light">
+                <div class="card-body">
+                    <h6 class="card-title">
+                        <i class="fas fa-lightbulb text-warning me-2"></i>
+                        Need a sample?
+                    </h6>
+                    <p class="card-text small text-muted mb-2">
+                        Click below to load a sample resume for testing
+                    </p>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" id="loadSample">
+                        <i class="fas fa-file-import me-1"></i>
+                        Load Sample Resume
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tips -->
+            <div class="mt-4">
+                <h6 class="fw-bold mb-3">
+                    <i class="fas fa-tips text-success me-2"></i>
+                    Tips for Better Analysis
+                </h6>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fas fa-check-circle text-success me-2 mt-1"></i>
+                            <small>Include complete work experience with job titles and descriptions</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fas fa-check-circle text-success me-2 mt-1"></i>
+                            <small>List technical skills and programming languages</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fas fa-check-circle text-success me-2 mt-1"></i>
+                            <small>Include education background and certifications</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fas fa-check-circle text-success me-2 mt-1"></i>
+                            <small>Use clear, professional language and avoid special characters</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const textarea = document.getElementById('resume_text');
+    const charCount = document.getElementById('charCount');
+    const charProgress = document.getElementById('charProgress');
+    const form = document.getElementById('resumeForm');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const loadSampleBtn = document.getElementById('loadSample');
+
+    // Character counter
+    function updateCharCount() {
+        const length = textarea.value.length;
+        charCount.textContent = length;
+        
+        // Update progress bar
+        const percentage = Math.min((length / 3000) * 100, 100);
+        charProgress.style.width = percentage + '%';
+        
+        // Change color based on length
+        if (length < 500) {
+            charProgress.className = 'progress-bar bg-warning';
+        } else if (length <= 3000) {
+            charProgress.className = 'progress-bar bg-success';
+        } else {
+            charProgress.className = 'progress-bar bg-danger';
+        }
+    }
+
+    textarea.addEventListener('input', updateCharCount);
+    updateCharCount(); // Initial call
+
+    // Form submission with loading state
+    form.addEventListener('submit', function(e) {
+        const btnText = analyzeBtn.querySelector('.btn-text');
+        const btnLoading = analyzeBtn.querySelector('.btn-loading');
+        
+        btnText.classList.add('d-none');
+        btnLoading.classList.remove('d-none');
+        analyzeBtn.disabled = true;
+    });
+
+    // Load sample resume
+    loadSampleBtn.addEventListener('click', function() {
+        const sampleResume = `John Smith
+Senior Data Scientist
+Email: john.smith@email.com
+Phone: (555) 987-6543
+LinkedIn: linkedin.com/in/johnsmith
+
+PROFESSIONAL SUMMARY:
+Experienced Data Scientist with 5+ years in machine learning, statistical analysis, and big data processing. Proven track record of developing predictive models that drive business decisions and improve operational efficiency.
+
+WORK EXPERIENCE:
+
+Senior Data Scientist | TechCorp Inc. | 2021-Present
+• Developed machine learning models for customer segmentation resulting in 25% increase in conversion rates
+• Led cross-functional team of 6 data professionals on predictive analytics projects
+• Implemented deep learning solutions using TensorFlow and PyTorch for image recognition tasks
+• Built real-time recommendation systems serving 1M+ users daily
+
+Data Scientist | DataSolutions LLC | 2019-2021
+• Created statistical models for demand forecasting with 90% accuracy
+• Developed NLP algorithms for sentiment analysis of customer feedback
+• Automated data pipelines using Python, SQL, and Apache Airflow
+• Collaborated with product teams to integrate ML models into production systems
+
+Junior Data Analyst | Analytics Plus | 2018-2019
+• Performed exploratory data analysis on large datasets using Python and R
+• Created interactive dashboards using Tableau and Power BI
+• Conducted A/B tests to optimize marketing campaigns
+
+EDUCATION:
+Master of Science in Data Science | Stanford University | 2018
+Bachelor of Science in Computer Science | UC Berkeley | 2016
+
+TECHNICAL SKILLS:
+Programming Languages: Python, R, SQL, Java, Scala
+Machine Learning: scikit-learn, TensorFlow, PyTorch, Keras, XGBoost
+Big Data: Spark, Hadoop, Kafka, Elasticsearch
+Databases: PostgreSQL, MongoDB, Redis, Cassandra
+Cloud Platforms: AWS (S3, EC2, SageMaker), Google Cloud Platform, Azure
+Visualization: Tableau, Power BI, matplotlib, seaborn, plotly
+Other: Git, Docker, Kubernetes, Jenkins, Jupyter Notebooks
+
+CERTIFICATIONS:
+• AWS Certified Machine Learning Specialist (2022)
+• Google Cloud Professional Data Engineer (2021)
+• Tableau Desktop Certified Professional (2020)
+
+PUBLICATIONS:
+• "Advanced Time Series Forecasting for E-commerce" - Journal of Data Science (2022)
+• "Deep Learning Approaches to Customer Churn Prediction" - Conference on Machine Learning (2021)
+
+PROJECTS:
+• Real-time Fraud Detection System: Built ML pipeline processing 100K+ transactions/hour
+• Customer Lifetime Value Prediction: Developed ensemble model improving prediction accuracy by 30%
+• Automated Content Recommendation Engine: Created system increasing user engagement by 40%`;
+
+        textarea.value = sampleResume;
+        updateCharCount();
+        
+        // Scroll to textarea
+        textarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Brief highlight animation
+        textarea.style.backgroundColor = '#fff3cd';
+        setTimeout(() => {
+            textarea.style.backgroundColor = '';
+        }, 1000);
+    });
+});
+</script>
+{% endblock %}

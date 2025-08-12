@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Classifier - AI-Powered Resume Analysis{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-75">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="display-4 fw-bold mb-4">
+                        <span class="text-gradient">AI-Powered</span><br>
+                        Resume Classification
+                    </h1>
+                    <p class="lead mb-4">
+                        Leverage advanced Natural Language Processing and Machine Learning 
+                        to automatically analyze and classify resumes with high accuracy.
+                    </p>
+                    <div class="d-flex gap-3 mb-4">
+                        <a href="{{ url_for('predict') }}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-brain me-2"></i>Try Now
+                        </a>
+                        <a href="{{ url_for('about') }}" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-info-circle me-2"></i>Learn More
+                        </a>
+                    </div>
+                    
+                    <!-- Stats Cards -->
+                    <div class="row g-3">
+                        <div class="col-4">
+                            <div class="stat-card">
+                                <div class="stat-number">63.49%</div>
+                                <div class="stat-label">F1-Score</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="stat-card">
+                                <div class="stat-number">9,544</div>
+                                <div class="stat-label">Trained Samples</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="stat-card">
+                                <div class="stat-number">11</div>
+                                <div class="stat-label">Features</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-animation">
+                    <div class="floating-card">
+                        <div class="card shadow-lg border-0">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="icon-circle bg-primary me-3">
+                                        <i class="fas fa-file-alt text-white"></i>
+                                    </div>
+                                    <h5 class="mb-0">Resume Analysis</h5>
+                                </div>
+                                <div class="progress mb-3" style="height: 8px;">
+                                    <div class="progress-bar bg-gradient-primary" style="width: 85%"></div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="col-6">
+                                        <small class="text-muted">Match Score</small>
+                                        <div class="fw-bold text-success">85.2%</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <small class="text-muted">Category</small>
+                                        <div class="fw-bold">Data Science</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center mb-5">
+                <h2 class="display-5 fw-bold">Powerful Features</h2>
+                <p class="lead text-muted">
+                    Advanced NLP techniques combined with machine learning algorithms
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon bg-primary">
+                        <i class="fas fa-brain text-white"></i>
+                    </div>
+                    <h5>Smart Analysis</h5>
+                    <p class="text-muted">
+                        Advanced text preprocessing with stemming, lemmatization, 
+                        and statistical feature extraction.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon bg-success">
+                        <i class="fas fa-chart-line text-white"></i>
+                    </div>
+                    <h5>High Accuracy</h5>
+                    <p class="text-muted">
+                        Trained on 9,544 resumes with cross-validation achieving 
+                        63.49% F1-score performance.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon bg-info">
+                        <i class="fas fa-lightning-bolt text-white"></i>
+                    </div>
+                    <h5>Instant Results</h5>
+                    <p class="text-muted">
+                        Get immediate classification results with confidence scores 
+                        and detailed feature analysis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How it Works Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center mb-5">
+                <h2 class="display-5 fw-bold">How It Works</h2>
+                <p class="lead text-muted">
+                    Simple steps to analyze your resume
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-3 text-center">
+                <div class="step-circle">1</div>
+                <h5 class="mt-3">Upload Text</h5>
+                <p class="text-muted">Paste your resume content into the text area</p>
+            </div>
+            
+            <div class="col-md-3 text-center">
+                <div class="step-circle">2</div>
+                <h5 class="mt-3">AI Processing</h5>
+                <p class="text-muted">Advanced NLP algorithms analyze your text</p>
+            </div>
+            
+            <div class="col-md-3 text-center">
+                <div class="step-circle">3</div>
+                <h5 class="mt-3">Feature Extraction</h5>
+                <p class="text-muted">Extract 11 statistical and linguistic features</p>
+            </div>
+            
+            <div class="col-md-3 text-center">
+                <div class="step-circle">4</div>
+                <h5 class="mt-3">Get Results</h5>
+                <p class="text-muted">Receive match score and detailed analysis</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="display-5 fw-bold mb-4">Ready to Analyze Your Resume?</h2>
+        <p class="lead mb-4">
+            Get instant AI-powered insights about your resume's job market fit
+        </p>
+        <a href="{{ url_for('predict') }}" class="btn btn-light btn-lg">
+            <i class="fas fa-rocket me-2"></i>Start Analysis
+        </a>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Animate stats on scroll
+document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStats();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    const statsSection = document.querySelector('.row.g-3');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+});
+
+function animateStats() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    statNumbers.forEach(stat => {
+        const finalValue = stat.textContent;
+        stat.textContent = '0';
+        
+        // Simple animation
+        setTimeout(() => {
+            stat.textContent = finalValue;
+            stat.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                stat.style.transform = 'scale(1)';
+            }, 200);
+        }, 300);
+    });
+}
+</script>
+{% endblock %}
