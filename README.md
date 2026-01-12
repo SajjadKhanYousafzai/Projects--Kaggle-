@@ -63,7 +63,7 @@
 - Comprehensive data visualization
 - Model interpretability
 
-**🔗 [View Notebook](#) | [Try Live Demo](#)**
+**🔗 [View Project](./rain_fall_prediction)**
 
 ---
 
@@ -81,11 +81,11 @@
 - Interactive visualizations
 - Business insights
 
-**🔗 [View Notebook](#)**
+**🔗 [View Project](./customer-personality-analysis)**
 
 ---
 
-### 🩺 **Diabetes Classification**
+### 🩺 **[Diabetes Classification](./Diabetes%20Classification)**
 **🎯 Objective:** Early diabetes detection using ML algorithms
 
 **🔧 Tech Stack:**  
@@ -99,7 +99,7 @@
 - Web-based prediction interface
 - Medical data preprocessing
 
-**🔗 [View Notebook](#) | [Try App](#)**
+**🔗 [View Project](./Diabetes%20Classification) | [View Notebook](./Diabetes%20Classification/Diabetes.ipynb)**
 
 ---
 
@@ -117,7 +117,7 @@
 - ROC curve analysis
 - Clinical interpretation
 
-**🔗 [View Notebook](#)**
+**🔗 [View Project](./heart-disease-prediction)**
 
 </td>
 <td width="50%">
@@ -136,11 +136,11 @@
 - Model explainability
 - Business rule integration
 
-**🔗 [View Notebook](#)**
+**🔗 [View Project](./loan-approval-prediction)**
 
 ---
 
-### 🍄 **Mushroom Classification**
+### 🍄 **[Mushroom Classification](./Mushroom_cleaned)**
 **🎯 Objective:** Classify mushrooms as edible/poisonous
 
 **🔧 Tech Stack:**  
@@ -154,11 +154,11 @@
 - Interactive Streamlit app
 - Safety-critical application
 
-**🔗 [View Notebook](#) | [Try App](#)**
+**🔗 [View Project](./Mushroom_cleaned) | [View Notebook](./Mushroom_cleaned/Mushroom.ipynb)**
 
 ---
 
-### 📄 **Resume NLP Analysis**
+### 📄 **[Resume NLP Analysis](./Resume%20NLP%20Project)**
 **🎯 Objective:** Extract insights from resume text data
 
 **🔧 Tech Stack:**  
@@ -172,7 +172,7 @@
 - Sentiment analysis
 - Resume ranking system
 
-**🔗 [View Notebook](#)**
+**🔗 [View Project](./Resume%20NLP%20Project) | [View Notebook](./Resume%20NLP%20Project/Resume_data.ipynb)**
 
 ---
 
@@ -190,11 +190,11 @@
 - Future predictions
 - Interactive dashboards
 
-**🔗 [View Notebook](#)**
+**🔗 [View Project](./energy-consumption-forecasting)**
 
 ---
 
-### 🧬 **Molecular Machine Learning**
+### 🧬 **[Molecular Machine Learning](./molecular-machine-learning)**
 **🎯 Objective:** Predict molecular properties using ML
 
 **🔧 Tech Stack:**  
@@ -208,7 +208,7 @@
 - Chemical property prediction
 - Drug discovery applications
 
-**🔗 [View Notebook](#)**
+**🔗 [View Project](./molecular-machine-learning) | [View Notebook](./molecular-machine-learning/molecular.ipynb)**
 
 </td>
 </tr>
@@ -495,4 +495,3 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 **📊 Happy Analyzing! 🚀**
 
 </div>
-
