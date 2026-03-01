@@ -1,0 +1,18 @@
+# PPE Kit Detection — FastAPI Backend
+
+# ── API framework ─────────────────────────────────────────────────────────────
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9       # required for File() / UploadFile
+
+# ── ML / inference ────────────────────────────────────────────────────────────
+ultralytics>=8.3.0
+torch>=2.1.0
+torchvision>=0.16.0
+
+# ── HuggingFace Hub (model download) ─────────────────────────────────────────
+huggingface-hub>=0.22.0
+
+# ── Image processing ──────────────────────────────────────────────────────────
+Pillow>=10.2.0
+numpy>=1.26.0
