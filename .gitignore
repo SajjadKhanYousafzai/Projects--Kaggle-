@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+.venv/
+venv/
+*.egg-info/
+.ipynb_checkpoints/
+
+# Node / frontend
+node_modules/
+dist/
+.cache/
+*.local
+
+# Kaggle cache
+.cache/
+kagglehub/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# Large training artefacts — keep PNGs + CSVs, exclude raw weight checkpoints
+# Uncomment below if you want to exclude model weights from the repo:
+# *.pt
+# Artifacts/ppe_yolo11s/weights/

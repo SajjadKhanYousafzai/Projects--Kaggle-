@@ -1,0 +1,17 @@
+path: /content/ppe_detection
+train: train/images
+val: valid/images
+test: test/images
+nc: 11
+names:
+- Helmet
+- Gloves
+- Vest
+- Boots
+- Goggles
+- none
+- Person
+- no_helmet
+- no_goggle
+- no_gloves
+- no_boots
