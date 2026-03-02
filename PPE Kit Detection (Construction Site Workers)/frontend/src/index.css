@@ -1,3 +1,9 @@
+@import '@fontsource/outfit/300.css';
+@import '@fontsource/outfit/400.css';
+@import '@fontsource/outfit/500.css';
+@import '@fontsource/outfit/600.css';
+@import '@fontsource/outfit/700.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,13 +16,63 @@
   }
 
   body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #0f111a;
+    color: #f8fafc;
   }
 
-  /* Custom scrollbar */
-  ::-webkit-scrollbar        { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track  { background: #111827; border-radius: 3px; }
-  ::-webkit-scrollbar-thumb  { background: #374151; border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+  /* Custom glow scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+    border: 2px solid #0f111a;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background-color: rgba(26, 29, 45, 0.6);
+    @apply backdrop-blur-xl border border-white/5 shadow-xl;
+  }
+
+  .glass-header {
+    background-color: rgba(15, 17, 26, 0.8);
+    @apply backdrop-blur-md border-b border-white/5 shadow-lg;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r;
+  }
+
+  .btn-primary {
+    @apply flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300;
+    @apply bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-[0_4px_14px_0_rgba(16, 185, 129, 0.39)];
+    @apply hover:shadow-[0_6px_20px_rgba(16, 185, 129, 0.23)] hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none !important;
+  }
+
+  .btn-danger {
+    @apply flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300;
+    @apply bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-[0_4px_14px_0_rgba(244, 63, 94, 0.39)];
+    @apply hover:shadow-[0_6px_20px_rgba(244, 63, 94, 0.23)] hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none !important;
+  }
+
+  .btn-secondary {
+    @apply flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300;
+    @apply bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 hover:border-white/20;
+    @apply hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none !important;
+  }
 }

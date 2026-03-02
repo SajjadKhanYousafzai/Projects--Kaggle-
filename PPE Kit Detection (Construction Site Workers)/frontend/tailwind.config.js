@@ -3,11 +3,34 @@ export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
-      colors: {
-        compliant: '#16a34a',
-        violation: '#dc2626',
-        neutral:   '#6b7280',
+      fontFamily: {
+        sans: ['Outfit', 'system-ui', 'sans-serif'],
       },
+      colors: {
+        compliant: '#10b981', // emerald-500
+        violation: '#fb7185', // rose-400
+        neutral: '#94a3b8', // slate-400
+        midnight: {
+          900: '#0f111a',
+          800: '#1a1d2d',
+          700: '#262a40',
+        }
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-out forwards',
+        'slide-up': 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        }
+      }
     },
   },
   plugins: [],

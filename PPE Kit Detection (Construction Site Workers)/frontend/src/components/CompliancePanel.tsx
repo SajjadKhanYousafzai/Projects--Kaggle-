@@ -1,6 +1,6 @@
 import React from 'react'
 import { ComplianceResult, CLASS_COLORS, classType } from '../types'
-import { CheckCircle, XCircle, ShieldCheck, ShieldX } from 'lucide-react'
+import { CheckCircle, XCircle, ShieldCheck, ShieldX, Activity } from 'lucide-react'
 
 interface Props {
   result: ComplianceResult | null
@@ -10,41 +10,56 @@ interface Props {
 export const CompliancePanel: React.FC<Props> = ({ result, loading }) => {
   if (loading) {
     return (
-      <div className="bg-gray-900 rounded-xl p-5 flex items-center justify-center h-48">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-400" />
+      <div className="glass-panel p-6 rounded-2xl flex flex-col items-center justify-center h-48 gap-4 border-emerald-500/20">
+        <div className="w-10 h-10 rounded-full border-4 border-emerald-500/20 border-t-emerald-500 animate-spin"></div>
+        <span className="text-emerald-400 font-medium animate-pulse">Analyzing frame...</span>
       </div>
     )
   }
 
   if (!result) {
     return (
-      <div className="bg-gray-900 rounded-xl p-5 flex items-center justify-center h-48 text-gray-500 text-sm">
-        No detection yet — point a camera or upload an image.
+      <div className="glass-panel p-6 rounded-2xl flex flex-col items-center justify-center h-48 text-center gap-3">
+        <Activity className="w-8 h-8 text-slate-600" />
+        <p className="text-slate-500 text-sm max-w-[200px]">
+          System standby. Awaiting visual input for analysis.
+        </p>
       </div>
     )
   }
 
   return (
-    <div className="bg-gray-900 rounded-xl p-5 space-y-4">
+    <div className="glass-panel p-6 rounded-2xl space-y-6">
       {/* Overall status */}
       <div
-        className={`flex items-center gap-3 p-3 rounded-lg ${
-          result.compliant
-            ? 'bg-green-950 border border-green-700'
-            : 'bg-red-950 border border-red-700'
-        }`}
+        className={`flex items-center gap-4 p-4 rounded-xl shadow-lg border backdrop-blur-md transition-all duration-300 ${result.compliant
+            ? 'bg-emerald-500/10 border-emerald-500/30'
+            : 'bg-rose-500/10 border-rose-500/30 animate-pulse-slow'
+          }`}
       >
-        {result.compliant ? (
-          <ShieldCheck className="w-6 h-6 text-green-400 flex-shrink-0" />
-        ) : (
-          <ShieldX className="w-6 h-6 text-red-400 flex-shrink-0" />
-        )}
+        <div className={`p-2 rounded-lg ${result.compliant ? 'bg-emerald-500/20' : 'bg-rose-500/20'}`}>
+          {result.compliant ? (
+            <ShieldCheck className="w-6 h-6 text-emerald-400" />
+          ) : (
+            <ShieldX className="w-6 h-6 text-rose-400" />
+          )}
+        </div>
         <div>
-          <p className={`font-bold text-sm ${result.compliant ? 'text-green-300' : 'text-red-300'}`}>
-            {result.compliant ? 'COMPLIANT — All critical PPE present' : 'NON-COMPLIANT — Immediate action required'}
+          <p className={`font-bold text-sm tracking-wide ${result.compliant ? 'text-emerald-300' : 'text-rose-300'}`}>
+            {result.compliant ? 'COMPLIANT STATUS' : 'VIOLATION DETECTED'}
+          </p>
+          <p className="text-xs text-slate-400 mt-1">
+            {result.compliant ? 'All critical safety gear verified.' : 'Immediate action required.'}
           </p>
           {result.fps !== undefined && (
-            <p className="text-xs text-gray-400 mt-0.5">{result.fps} FPS · {result.detections.length} detections</p>
+            <div className="flex items-center gap-2 mt-2">
+              <span className="text-[10px] uppercase font-bold text-slate-500 bg-midnight-900 border border-white/5 px-2 py-0.5 rounded">
+                {result.fps} FPS
+              </span>
+              <span className="text-[10px] uppercase font-bold text-slate-500 bg-midnight-900 border border-white/5 px-2 py-0.5 rounded">
+                {result.detections.length} Obj
+              </span>
+            </div>
           )}
         </div>
       </div>
@@ -52,17 +67,22 @@ export const CompliancePanel: React.FC<Props> = ({ result, loading }) => {
       {/* Wearing (positive) */}
       {result.wearing.length > 0 && (
         <div>
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-            ✅ PPE Detected
+          <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+            Verified Gear
           </p>
           <div className="flex flex-wrap gap-2">
             {result.wearing.map(item => (
               <span
                 key={item}
-                className="flex items-center gap-1 text-xs px-2 py-1 rounded-full font-medium"
-                style={{ backgroundColor: CLASS_COLORS[item] + '33', color: CLASS_COLORS[item], border: `1px solid ${CLASS_COLORS[item]}55` }}
+                className="flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg font-medium shadow-sm"
+                style={{
+                  backgroundColor: CLASS_COLORS[item] + '20',
+                  color: CLASS_COLORS[item],
+                  border: `1px solid ${CLASS_COLORS[item]}40`
+                }}
               >
-                <CheckCircle className="w-3 h-3" />
+                <CheckCircle className="w-3.5 h-3.5" />
                 {item}
               </span>
             ))}
@@ -73,17 +93,17 @@ export const CompliancePanel: React.FC<Props> = ({ result, loading }) => {
       {/* Missing (negative) */}
       {result.missing.length > 0 && (
         <div>
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-            ❌ PPE Missing
+          <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-rose-500"></span>
+            Missing Gear
           </p>
           <div className="flex flex-wrap gap-2">
             {result.missing.map(item => (
               <span
                 key={item}
-                className="flex items-center gap-1 text-xs px-2 py-1 rounded-full font-medium"
-                style={{ backgroundColor: '#dc262633', color: '#f87171', border: '1px solid #dc262655' }}
+                className="flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg font-medium shadow-sm bg-rose-500/10 text-rose-400 border border-rose-500/30"
               >
-                <XCircle className="w-3 h-3" />
+                <XCircle className="w-3.5 h-3.5" />
                 {item.replace('no_', 'Missing ')}
               </span>
             ))}
@@ -93,28 +113,32 @@ export const CompliancePanel: React.FC<Props> = ({ result, loading }) => {
 
       {/* Per-class confidence bars */}
       {result.detections.length > 0 && (
-        <div>
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-            Detection Scores
+        <div className="pt-2 border-t border-white/5">
+          <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-4">
+            Detection Confidence
           </p>
-          <div className="space-y-1.5 max-h-40 overflow-y-auto pr-1">
+          <div className="space-y-3 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
             {result.detections
               .sort((a, b) => b.confidence - a.confidence)
               .map((d, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <span className="text-xs w-24 truncate text-gray-300">{d.className}</span>
-                  <div className="flex-1 bg-gray-800 rounded-full h-1.5">
+                <div key={i} className="flex flex-col gap-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-medium text-slate-300">{d.className}</span>
+                    <span className="text-xs font-mono text-slate-400">
+                      {(d.confidence * 100).toFixed(1)}%
+                    </span>
+                  </div>
+                  <div className="h-1.5 w-full bg-midnight-900 rounded-full overflow-hidden border border-white/5">
                     <div
-                      className="h-1.5 rounded-full transition-all"
+                      className="h-full rounded-full transition-all duration-300 relative"
                       style={{
                         width: `${d.confidence * 100}%`,
-                        backgroundColor: CLASS_COLORS[d.className] ?? '#6b7280',
+                        backgroundColor: CLASS_COLORS[d.className] ?? '#64748b',
                       }}
-                    />
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/20"></div>
+                    </div>
                   </div>
-                  <span className="text-xs text-gray-400 w-8 text-right">
-                    {(d.confidence * 100).toFixed(0)}%
-                  </span>
                 </div>
               ))}
           </div>
