@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from 'react'
+import React, { useRef, useState, useCallback, useEffect } from 'react'
 import { detect } from '../utils/detector'
 import { drawDetections } from '../utils/drawing'
 import { ComplianceResult } from '../types'
@@ -35,12 +35,20 @@ export const ImageTab: React.FC<Props> = ({ modelReady, confThresh }) => {
     img.src = src
   }, [confThresh])
 
+  // Re-run detection whenever confThresh changes (debounced 300ms)
+  useEffect(() => {
+    if (!imgSrc) return
+    const timer = setTimeout(() => run(imgSrc), 300)
+    return () => clearTimeout(timer)
+  }, [confThresh]) // eslint-disable-line react-hooks/exhaustive-deps
+
   const onFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
     const url = URL.createObjectURL(file)
     setImgSrc(url)
     run(url)
+    e.target.value = ''  // reset so same file can be re-uploaded
   }
 
   const onDrop = (e: React.DragEvent) => {
