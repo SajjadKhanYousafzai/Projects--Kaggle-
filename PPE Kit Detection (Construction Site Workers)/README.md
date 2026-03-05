@@ -1,6 +1,8 @@
 # 🦺 PPE Kit Detection — Construction Site Safety
 
-An end-to-end **YOLO11s** object detection pipeline that monitors PPE compliance on construction sites, paired with a fully in-browser **React + TypeScript** frontend powered by ONNX Runtime Web.
+An end-to-end **YOLO11s** object detection pipeline that monitors PPE compliance on construction sites, paired with a **React + TypeScript** frontend and a **FastAPI** backend deployed to the cloud.
+
+🚀 **Live Demo:** [ppe-detection-api-orpin.vercel.app](https://ppe-detection-api-orpin.vercel.app)
 
 ---
 
@@ -12,6 +14,7 @@ An end-to-end **YOLO11s** object detection pipeline that monitors PPE compliance
 - [Project Structure](#project-structure)
 - [Quick Start](#quick-start)
 - [Frontend](#frontend)
+- [Deployment](#deployment)
 - [Pipeline Summary](#pipeline-summary)
 - [Results](#results)
 
@@ -71,31 +74,26 @@ The notebook performs a clean **stratified 75 / 15 / 10 re-split**, pHash dedupl
 ```
 PPE Kit Detection (Construction Site Workers)/
 ├── construction_kit.ipynb          # Main training notebook (local)
-├── requirements.txt                # Python dependencies
+├── construction_kit_kaggle.ipynb   # Kaggle-ready training notebook
 ├── data/                           # Raw dataset (not committed)
 │   ├── images/
 │   └── labels/
 ├── Artifacts/                      # Saved model outputs
 │   ├── best_ppe_model.pt           # PyTorch weights (18 MB)
-│   ├── ppe_yolo11s/
-│   │   └── weights/
-│   │       └── best.onnx           # ONNX export (36 MB)
-│   ├── model_metadata.json
 │   ├── dataset.yaml
-│   ├── training_log.txt
-│   ├── confusion_matrix.png
-│   ├── training_curves.png
+│   ├── model_metadata.json
 │   └── ...
-└── frontend/                       # React + TypeScript in-browser app
+├── backend/                        # FastAPI inference server
+│   ├── main.py                     # FastAPI app + YOLO11s endpoint
+│   ├── requirements.txt
+│   └── Dockerfile                  # For HuggingFace Spaces deployment
+└── frontend/                       # React + TypeScript web app
     ├── src/
     │   ├── components/
-    │   ├── utils/
-    │   │   ├── detector.ts         # ONNX inference + NMS
-    │   │   └── drawing.ts          # Canvas annotation
-    │   └── types/
-    ├── public/
-    │   ├── models/best.onnx
-    │   └── ort-wasm-*.wasm
+    │   └── utils/
+    ├── .env                        # Local: VITE_API_URL=http://localhost:7860
+    ├── .env.example
+    ├── vercel.json                 # Vercel deployment config
     └── package.json
 ```
 
@@ -111,15 +109,33 @@ pip install -r requirements.txt
 
 ### 2 — Run the training notebook
 
-Open `construction_kit_colabb.ipynb` in VS Code or Jupyter and run all cells top-to-bottom.Trained weights are saved to `Artifacts/`.
+Open `construction_kit.ipynb` in VS Code or Jupyter and run all cells top-to-bottom. Trained weights are saved to `Artifacts/`.
 
 > **GPU recommended.** The notebook runs on CPU but is ~10× faster on an NVIDIA GPU (tested on Colab T4).
+
+### 3 — Run the backend
+
+```bash
+cd backend
+pip install -r requirements.txt
+python main.py
+# → http://localhost:7860
+```
+
+### 4 — Run the frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+# → http://localhost:5173
+```
 
 ---
 
 ## Frontend
 
-A zero-server-needed web app that runs ONNX inference entirely in the browser.
+A React web app that sends images/video frames to the FastAPI backend for YOLO11s inference.
 
 ### Features
 
@@ -131,23 +147,24 @@ A zero-server-needed web app that runs ONNX inference entirely in the browser.
 | 📊 Compliance Panel | Per-class confidence bars, worn / missing summary      |
 | 📝 Violation Log    | Timestamped log with snapshots + CSV export            |
 
-### Run locally
+**Stack:** Vite 5 · React 18 · TypeScript 5 · Tailwind CSS 3 · FastAPI · YOLO11s
 
-```bash
-cd frontend
-npm install
-npm run dev
-# → http://localhost:5173
-```
+---
 
-### Build for production
+## Deployment
 
-```bash
-npm run build
-# Output: frontend/dist/
-```
+| Component | Platform | URL |
+| --------- | -------- | --- |
+| **Frontend** | Vercel | [ppe-detection-api-orpin.vercel.app](https://ppe-detection-api-orpin.vercel.app) |
+| **Backend** | HuggingFace Spaces (Docker) | [sajjad-ali-shah-ppe-detection-api.hf.space](https://sajjad-ali-shah-ppe-detection-api.hf.space) |
+| **Model weights** | HuggingFace Hub | [Sajjad-Ali-Shah/ppe-yolo11s](https://huggingface.co/Sajjad-Ali-Shah/ppe-yolo11s) |
 
-**Stack:** Vite 5 · React 18 · TypeScript 5 · Tailwind CSS 3 · ONNX Runtime Web 1.17
+### Deploy your own
+
+1. Push `backend/` to a HuggingFace Docker Space (set `HF_TOKEN` as a repository secret)
+2. Import the repo on [vercel.com](https://vercel.com), set root directory to `frontend/`
+3. Add environment variable: `VITE_API_URL=https://<your-hf-space>.hf.space`
+4. Deploy
 
 ---
 
@@ -163,7 +180,7 @@ npm run build
 | Evaluation    | Per-class P / R / mAP50 / mAP50-95 on val & test               |
 | Export        | `best.pt` + `best.onnx` saved to `Artifacts/`            |
 | Frontend      | In-browser ONNX inference — no backend required               |
-| Demo          | Gradio app (Step 14 in notebook)                               |
+| Demo          | Live at [ppe-detection-api-orpin.vercel.app](https://ppe-detection-api-orpin.vercel.app) |
 
 ---
 
@@ -180,4 +197,4 @@ npm run build
 
 ---
 
-*Part of a Kaggle Computer Vision portfolio — [SajjadKhanYousafzai/Projects--Kaggle-](https://github.com/SajjadKhanYousafzai/Projects--Kaggle-)*
+*Part of a Kaggle Computer Vision portfolio — [SajjadKhanYousafzai/Kaggle-ML-Portfolio](https://github.com/SajjadKhanYousafzai/Kaggle-ML-Portfolio)*
