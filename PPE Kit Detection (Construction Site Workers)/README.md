@@ -101,6 +101,13 @@ PPE Kit Detection (Construction Site Workers)/
 
 ## Quick Start
 
+### 0 — Clone the repository
+
+```bash
+git clone https://github.com/SajjadKhanYousafzai/Kaggle-ML-Portfolio.git
+cd "Kaggle-ML-Portfolio/PPE Kit Detection (Construction Site Workers)"
+```
+
 ### 1 — Install Python dependencies
 
 ```bash
