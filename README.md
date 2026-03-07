@@ -240,6 +240,29 @@ Each solution is built with state-of-the-art technology but designed to be **acc
 
 **🔗 [Explore Project](./molecular-machine-learning) | [View Research](./molecular-machine-learning/molecular.ipynb)**
 
+---
+
+### 🌾 **[AI Smart Farming Advisor](./Crop%20Recommendation%20Project)**
+**The Problem:** Farmers lack access to expert agricultural knowledge — wrong crop choices, excess fertilizers, and poor irrigation lead to low yields and soil damage.
+
+**The Solution:** An AI-powered advisory system that takes soil & climate data and recommends the best crop, fertilizer, and irrigation plan.
+
+**🔧 Technology:**  
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![Random Forest](https://img.shields.io/badge/Random_Forest-228B22?style=flat-square&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-FF6600?style=flat-square&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
+
+**✨ What It Does:**
+- Recommends the most suitable crop across 22 classes
+- Suggests optimal fertilizer based on soil nutrient levels
+- Generates smart irrigation plans using rainfall & humidity data
+- SHAP-based explainability: *why* the AI chose a particular crop
+
+**💡 Real-World Impact:** Empowers small and large-scale farmers in India and globally with expert-level precision agriculture — accessible to anyone through a simple web app.
+
+**🔗 [Explore Project](./Crop%20Recommendation%20Project) | [View Notebook](./Crop%20Recommendation%20Project/crop.ipynb)**
+
 </td>
 </tr>
 </table>
@@ -254,7 +277,7 @@ Each solution is built with state-of-the-art technology but designed to be **acc
 
 | 🏆 Metric | 📊 Result | 🎯 Significance |
 |-----------|-----------|-----------------|
-| **Projects Completed** | 8+ | Diverse real-world applications |
+| **Projects Completed** | 9+ | Diverse real-world applications |
 | **Average Accuracy** | 91.2% | High-quality, reliable predictions |
 | **Interactive Demos** | 5 Live | Accessible to non-technical users |
 | **Lines of Code** | 10,000+ | Comprehensive implementations |
@@ -269,6 +292,7 @@ Environmental:         🌧️       (Rainfall Prediction)
 Business Intelligence: 👥📊    (Customer Analysis, Resume Screening)
 Scientific Research:   🧬       (Molecular ML)
 Safety Systems:        🍄       (Mushroom Classification)
+Agriculture & Farming: 🌾🤖    (AI Smart Farming Advisor)
 ```
 
 ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=SajjadKhanYousafzai&show_icons=true&theme=radical&hide_border=true&bg_color=0D1117)
@@ -375,11 +399,12 @@ Each project uses specialized tools. Here's what they do in plain English:
 | 🏷️ Problem Type | 💡 What It Means | 📊 Projects | 🔧 Tools Used |
 |-----------------|------------------|-------------|---------------|
 | **🔮 Prediction** | Forecasting future events | 6 | CatBoost, XGBoost |
-| **🎭 Classification** | Sorting things into categories | 4 | Random Forest, Neural Networks |
+| **🎭 Classification** | Sorting things into categories | 5 | Random Forest, Neural Networks |
 | **👥 Segmentation** | Grouping similar items | 2 | K-Means Clustering |
 | **📈 Time Series** | Analyzing trends over time | 1 | Prophet, ARIMA |
 | **📝 Text Analysis** | Understanding written language | 1 | NLP Tools |
 | **🧬 Scientific** | Specialized research applications | 1 | Domain-specific Tools |
+| **🌾 Agriculture** | Precision farming decisions | 1 | Random Forest, XGBoost, SHAP |
 
 </div>
 
@@ -448,6 +473,11 @@ These projects demonstrate:
 - Better weather preparedness
 - Optimized resource use
 - Climate adaptation
+
+**Agriculture:**
+- Optimal crop selection per soil profile
+- Reduced chemical fertilizer waste
+- Smart irrigation scheduling
 
 </details>
 
