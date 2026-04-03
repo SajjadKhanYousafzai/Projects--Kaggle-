@@ -31,4 +31,7 @@ desktop.ini
 # Large training artefacts — keep PNGs + CSVs, exclude raw weight checkpoints
 # Uncomment below if you want to exclude model weights from the repo:
 # *.pt
+
+# PKLot raw dataset files
+PKLot Dataset/Dataset/
 # Artifacts/ppe_yolo11s/weights/
