@@ -33,5 +33,5 @@ desktop.ini
 # *.pt
 
 # PKLot raw dataset files
-PKLot Dataset/Dataset/
+PKLot-Parking-Occupancy-Detection/Dataset
 # Artifacts/ppe_yolo11s/weights/
