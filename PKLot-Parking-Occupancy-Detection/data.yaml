@@ -1,0 +1,9 @@
+
+path: D:\Projects--Kaggle-\PKLot-Parking-Occupancy-Detection\custom_yolo_data
+train: train/images
+val: valid/images
+test: test/images
+
+# Classes
+nc: 2
+names: ['space-empty', 'space-occupied']
