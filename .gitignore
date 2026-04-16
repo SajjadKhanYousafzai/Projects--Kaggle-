@@ -35,4 +35,5 @@ desktop.ini
 # PKLot raw dataset files
 PKLot-Parking-Occupancy-Detection/Dataset
 PKLot-Parking-Occupancy-Detection/custom_yolo_data
+PKLot-Parking-Occupancy-Detection/runs
 # Artifacts/ppe_yolo11s/weights/
